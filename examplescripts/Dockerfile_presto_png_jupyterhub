@@ -77,6 +77,9 @@ RUN meson install -C build
 WORKDIR ${PRESTO}/python
 RUN pip install --config-settings=builddir=build .
 
+# You may need to comment the three below lines to disable
+# FFTWisdom if you are cross-building on a macbook. It may slow
+# down the FFT but we didn't observe issues at test scale.
 WORKDIR ${PRESTO}/src
 RUN ${PRESTO}/build/src/makewisdom
 RUN mv  ${PRESTO}/src/fftw_wisdom.txt ${PRESTO}/lib
